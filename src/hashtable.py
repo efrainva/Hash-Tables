@@ -15,6 +15,7 @@ class HashTable:
     def __init__(self, capacity):
         self.capacity = capacity  # Number of buckets in the hash table
         self.storage = [None] * capacity
+        # self.length = 0
 
 
     def _hash(self, key):
@@ -23,6 +24,7 @@ class HashTable:
 
         You may replace the Python hash with DJB2 as a stretch goal.
         '''
+        print(hash(key))
         return hash(key)
 
 
@@ -44,41 +46,55 @@ class HashTable:
 
 
     def insert(self, key, value):
-        '''
-        Store the value with the given key.
 
-        # Part 1: Hash collisions should be handled with an error warning. (Think about and
-        # investigate the impact this will have on the tests)
+        # this doesn't put anything in order
+        # self.head = self.capacity -1 # the 'head starts from the right side
+        # hash(key)
+        # cap = self.capacity
+        # for i in range(cap-1 , 0 ,-1):
+        #     # print(i, i-1 )
+        #     self.storage[ i] = self.storage[i -1 ]
+        # #   print(i , i-1)
 
-        # Part 2: Change this so that hash collisions are handled with Linked List Chaining.
+        # pair = {hash(key):value}
+        # self.storage[0] = pair
+        # print(self.storage)
+        index = self._hash_mod(key)
+        if self.storage[index] is not None:
+            print('Collision for key '+ key)
+        self.storage[index] = LinkedPair(key,value)
 
-        Fill this in.
-        '''
-        pass
 
+
+    def get(self):
+        print( self.storage )
+        return
 
 
     def remove(self, key):
-        '''
-        Remove the value stored with the given key.
-
-        Print a warning if the key is not found.
-
-        Fill this in.
-        '''
-        pass
-
+        # for i in self.storage:
+        #     if i == key:
+        #         self.storage[i] = None
+        #         print(self.storage[i])
+        #     else:
+        #         print('no key or wrong key')
+        index = self._hash_mod(key)
+        self.storage[index] = None
 
     def retrieve(self, key):
-        '''
-        Retrieve the value stored with the given key.
 
-        Returns None if the key is not found.
+        # hkey = hash(key)
+        # print(hkey,'107')
+        # for i in range(0, self.capacity-1):
+        #     if self.storage[i].get(hkey) != hkey:
+        #         print(self.storage[i].get(hash(key)))
+        #     else:
+        #         None
 
-        Fill this in.
-        '''
-        pass
-
+        index = self._hash_mod(key)
+        if self.storage[index] is None:
+            return None
+        return self.storage[index].value
 
     def resize(self):
         '''
@@ -89,7 +105,19 @@ class HashTable:
         '''
         pass
 
+# one = HashTable(5)
+# # one.insert('hey','bye')
+# # one.insert('good','bad')
+# one.insert('o','n') 
+# # one.insert('1','1')
+# one.insert('2','2')
+# # one.insert('3','3')
+# # # one.insert('new','1')
 
+# # one._hash('2')
+# one.retrieve('o')
+# # print('line')
+# # one.get()
 
 if __name__ == "__main__":
     ht = HashTable(2)
