@@ -97,27 +97,19 @@ class HashTable:
         return self.storage[index].value
 
     def resize(self):
+        cap = self.capacity *2
+        print(cap )
         '''
         Doubles the capacity of the hash table and
         rehash all key/value pairs.
 
         Fill this in.
         '''
-        pass
-
+        # pass
+ 
 # one = HashTable(5)
-# # one.insert('hey','bye')
-# # one.insert('good','bad')
-# one.insert('o','n') 
-# # one.insert('1','1')
-# one.insert('2','2')
-# # one.insert('3','3')
-# # # one.insert('new','1')
+# one.resize()
 
-# # one._hash('2')
-# one.retrieve('o')
-# # print('line')
-# # one.get()
 
 if __name__ == "__main__":
     ht = HashTable(2)
